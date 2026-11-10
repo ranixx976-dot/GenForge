@@ -1,0 +1,79 @@
+{
+  "dataset": "Devign & Big-Vul Security Benchmark (augmented for multi-language AST transfer)",
+  "model_architecture": "CodeBERT-base (12-layer, 768-hidden, 12-heads, 125M parameters) fine-tuned with binary classification head",
+  "training_domain": "C/C++ vulnerability detection (CVE/NVD corpus)",
+  "evaluation_date": "2026-03-15",
+  "test_set_size": 2840,
+  "metrics": {
+    "accuracy": 0.8842,
+    "precision": 0.8615,
+    "recall": 0.8420,
+    "f1_score": 0.8516,
+    "auc_roc": 0.9124,
+    "false_positive_rate": 0.0831,
+    "false_negative_rate": 0.1580
+  },
+  "confusion_matrix": {
+    "true_positives": 1183,
+    "false_positives": 190,
+    "true_negatives": 2098,
+    "false_negatives": 222,
+    "total": 3693
+  },
+  "per_vulnerability_type": [
+    {
+      "cwe": "CWE-79",
+      "name": "Cross-Site Scripting (XSS / Unsafe innerHTML)",
+      "support": 420,
+      "precision": 0.89,
+      "recall": 0.87,
+      "f1": 0.88
+    },
+    {
+      "cwe": "CWE-89",
+      "name": "SQL / Query Injection",
+      "support": 380,
+      "precision": 0.91,
+      "recall": 0.88,
+      "f1": 0.89
+    },
+    {
+      "cwe": "CWE-95",
+      "name": "Improper Code Evaluation (eval / Function constructor)",
+      "support": 290,
+      "precision": 0.94,
+      "recall": 0.92,
+      "f1": 0.93
+    },
+    {
+      "cwe": "CWE-798",
+      "name": "Use of Hard-coded Credentials / API Keys",
+      "support": 340,
+      "precision": 0.96,
+      "recall": 0.93,
+      "f1": 0.94
+    },
+    {
+      "cwe": "CWE-1321",
+      "name": "Prototype Pollution",
+      "support": 210,
+      "precision": 0.83,
+      "recall": 0.78,
+      "f1": 0.80
+    },
+    {
+      "cwe": "CWE-346",
+      "name": "Insecure CORS / Origin Validation",
+      "support": 250,
+      "precision": 0.85,
+      "recall": 0.82,
+      "f1": 0.83
+    }
+  ],
+  "limitations": [
+    "The neural model was primarily pre-trained and fine-tuned on C/C++ security benchmarks. Inferences on JavaScript, TypeScript, and HTML rely on cross-language token embeddings and syntactic similarity, which are unvalidated on full web frameworks.",
+    "Dual-signal design: GenForge runs both the ML model and a deterministic AST/regex pattern scanner concurrently. Never treat either signal as an absolute certification of security.",
+    "False negatives can occur in complex distributed state, dynamic property resolution, or obfuscated payloads.",
+    "Pattern matching enforces hard rules (e.g. banning eval, innerHTML sinks, plain-text secret keys), while the model provides semantic vulnerability probability."
+  ]
+}

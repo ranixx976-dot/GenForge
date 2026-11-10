@@ -1,0 +1,6 @@
+{
+  "name": "GenForge - AI Web Studio & Scanner",
+  "description": "Dual-mode AI platform: generate interactive web apps with live sandboxed preview and vulnerability scanner, or ask questions with citations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

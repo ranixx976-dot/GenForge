@@ -1,0 +1,127 @@
+import React from 'react';
+import { ArrowLeft, Shield, FileText, Lock, Trash2 } from 'lucide-react';
+
+interface LegalPagesProps {
+  page: 'about' | 'terms' | 'privacy';
+  onBack: () => void;
+  onDeleteData?: () => void;
+}
+
+export const LegalPages: React.FC<LegalPagesProps> = ({ page, onBack, onDeleteData }) => {
+  return (
+    <div className="min-h-screen bg-[#0a0e17] text-slate-100 p-6 md:p-12 overflow-y-auto">
+      <div className="max-w-3xl mx-auto space-y-8">
+        <button
+          onClick={onBack}
+          className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-cyan-400 transition"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to GenForge</span>
+        </button>
+
+        {page === 'about' && (
+          <div className="space-y-6">
+            <div className="border-b border-slate-800 pb-4">
+              <h1 className="text-3xl font-extrabold text-white">About GenForge</h1>
+              <p className="text-xs text-slate-400 mt-1">
+                The Dual-Mode AI Web Studio & Security Cross-Check Engine
+              </p>
+            </div>
+            <div className="space-y-4 text-xs text-slate-300 leading-relaxed">
+              <p>
+                <strong>GenForge</strong> is built to unite rapid web software creation with pragmatic, empirical security analysis.
+              </p>
+              <h2 className="text-sm font-bold text-white pt-2">The Two Modes</h2>
+              <ul className="list-disc list-inside space-y-2 text-slate-400">
+                <li>
+                  <strong className="text-white">Build Mode:</strong> Convert natural language descriptions or sketches into full, multi-file web applications. Run immediately in an isolated, sandboxed iframe preview with live console capture and automatic iterative editing.
+                </li>
+                <li>
+                  <strong className="text-white">Ask Mode:</strong> Real-time technical reasoning assistant grounded with verified web citations. Strict constraints against hallucinated sources and explicit disclaimers for high-stakes topics.
+                </li>
+              </ul>
+
+              <h2 className="text-sm font-bold text-white pt-2">The Dual-Signal Security Scanner</h2>
+              <p className="text-slate-400">
+                Rather than treating AI security claims as an infallible black box, GenForge provides two distinct, unmerged signals:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                  <span className="font-bold text-cyan-400">1. CodeBERT Neural Classifier</span>
+                  <p className="text-[11px] text-slate-400 mt-1">Evaluates syntactic patterns and token sequences trained on vulnerability benchmarks.</p>
+                </div>
+                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                  <span className="font-bold text-emerald-400">2. Deterministic AST Cross-Check</span>
+                  <p className="text-[11px] text-slate-400 mt-1">Rigidly checks high-severity anti-patterns (eval, raw innerHTML sinks, hardcoded credentials).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {page === 'terms' && (
+          <div className="space-y-6">
+            <div className="border-b border-slate-800 pb-4">
+              <span className="text-[10px] uppercase font-bold text-amber-400 px-2 py-0.5 rounded bg-amber-950/60 border border-amber-800/40">
+                Draft Review
+              </span>
+              <h1 className="text-3xl font-extrabold text-white mt-2">Terms of Service (Draft)</h1>
+              <p className="text-xs text-slate-400 mt-1">Last updated: March 2026</p>
+            </div>
+            <div className="space-y-4 text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-bold text-white text-sm">1. Nature of the Service</h3>
+              <p>
+                GenForge provides generative AI capabilities for application prototyping and automated vulnerability scanning. All outputs, code generations, and risk scores are provided strictly "AS-IS". The vulnerability scanner represents a secondary advisory check and does not guarantee safety, regulatory compliance, or absence of zero-day exploits.
+              </p>
+              <h3 className="font-bold text-white text-sm">2. Permitted Use</h3>
+              <p>
+                Users agree not to utilize GenForge to generate malicious software, exploit payloads, automated attack bots, or illegal materials.
+              </p>
+              <h3 className="font-bold text-white text-sm">3. Limitation of Liability</h3>
+              <p>
+                In no event shall GenForge or its developers be liable for direct, indirect, or consequential damages resulting from deploying code generated by the service.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {page === 'privacy' && (
+          <div className="space-y-6">
+            <div className="border-b border-slate-800 pb-4">
+              <span className="text-[10px] uppercase font-bold text-cyan-400 px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/40">
+                Draft Review
+              </span>
+              <h1 className="text-3xl font-extrabold text-white mt-2">Privacy Policy & Data Rights</h1>
+              <p className="text-xs text-slate-400 mt-1">Last updated: March 2026</p>
+            </div>
+            <div className="space-y-4 text-xs text-slate-400 leading-relaxed">
+              <h3 className="font-bold text-white text-sm">1. Confidentiality & Sanitization</h3>
+              <p>
+                GenForge is engineered with privacy-first logging: system logs record request metadata, latency, and token totals, but do not log raw prompt text or generated code bodies.
+              </p>
+              <h3 className="font-bold text-white text-sm">2. Local Storage</h3>
+              <p>
+                Project files, conversation threads, and editor checkpoints are stored in your browser's local storage session.
+              </p>
+              <h3 className="font-bold text-white text-sm">3. Delete My Data</h3>
+              <p>
+                You may clear all cached workspaces, conversation histories, and editor checkpoints from this browser at any time:
+              </p>
+              {onDeleteData && (
+                <div className="pt-2">
+                  <button
+                    onClick={onDeleteData}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete All Local Data & Checkpoints</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
